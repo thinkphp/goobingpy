@@ -6,6 +6,7 @@ import json
 import logging
 import cgi
 from searchgoogle import Google
+from searchbing2 import Bing
 
 def get_html(items):
     if not items: return '<div>error</div>'
@@ -87,7 +88,19 @@ class Controller(webapp.RequestHandler):
         self.response.write('<div class="yui-gb">')
 
         self.response.write(r)  
+
         self.response.write('<div class="yui-u">')
+
+        appID = 'Hko5cXg5U8h/WIE46pYQjmo/MLXNNkXYr+VXx/a66Ig' #get your AppID from Microsoft Azure
+
+        bing = Bing(appID, q)
+
+        bing.search();
+
+        r2 = bing.get_html()
+
+        self.response.write( r2 )  
+  
         self.response.write('</div>')
 
         self.response.write('</div>')
